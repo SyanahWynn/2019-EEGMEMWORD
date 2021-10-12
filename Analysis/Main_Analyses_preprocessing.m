@@ -231,11 +231,7 @@ if preprodat < length(curexperiment.datasets_names)
     for d=1:length(curexperiment.datasets)
         fprintf('\nSAVING PREPROCESSED %s\n',curexperiment.datasets_names{d});
         eval(sprintf('%s.cfg.previous=[];',curexperiment.datasets_names{d}));
-        if strcmp(curexperiment.name,'FamRecTACS') || strcmp(curexperiment.name,'NySourceMem')
-            save([subjectdata.subjectdir filesep subjectdata.subjectnr curexperiment.dataset_name{d} '_Session' subjectdata.subjectses '_PreProcessed.mat'], curexperiment.datasets_names{d});
-        else
-            save([subjectdata.subjectdir filesep subjectdata.subjectnr curexperiment.dataset_name{d} '_PreProcessed.mat'], curexperiment.datasets_names{d});
-        end
+        save([subjectdata.subjectdir filesep subjectdata.subjectnr curexperiment.dataset_name{d} '_PreProcessed.mat'], curexperiment.datasets_names{d});
     end
     clear *dat data_*
 end     

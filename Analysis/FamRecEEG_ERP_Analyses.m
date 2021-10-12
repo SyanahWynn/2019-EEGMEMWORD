@@ -16,15 +16,28 @@ for d=1:length(curexperiment.datasets)-1 % exclude Rest EEG
             % find the trails corresponding to the current condition
             cfg.trials             = find(ismember(curexperiment.datasets(d).trialinfo(:,1),curcond)); 
             if length(cfg.trials) >= 1 % only include if there are more than 1 trials in the condition
+                % Data per condition
+                data_org = ft_preprocessing(cfg, curexperiment.datasets(d));
                 % ERP analysis per condition
-                cfg.channel            = 'EEG';     
+                %cfg.channel            = 'EEG';     
+                cfg.channel            = 'all'; %include VEOG & HEOG
                 data_ERP(t)           = ft_timelockanalysis(cfg,curexperiment.datasets(d));
                 % perform baseline correction
                 cfg.baseline           = curexperiment.baselinewindow;
                 data_ERP_norm(t)      = ft_timelockbaseline(cfg,data_ERP(t));
+                % substract the ERP from the original data (for the induced power)
+                for i=1:length(data_org.trial)
+                    data_org.trial{1,i}=data_org.trial{1,i}-data_ERP_norm(t).avg;
+                end
                 % save the data
                 data_cond              = data_ERP_norm(t);
                 evalc(sprintf('save([curexperiment.analysis_loc filesep subjectdata.subjectnr curexperiment.dataset_name{d} curexperiment.data%dl%d_name{t} ''_ERP''],''data_cond'')',d,l));
+                clear data_cond
+                data_org.cfg.previous      = [];
+                data_cond              = data_org;
+                data_cond.cfg.previous = []; % clear previous
+                evalc(sprintf('save([curexperiment.analysis_loc filesep subjectdata.subjectnr curexperiment.dataset_name{d} curexperiment.data%dl%d_name{t} ''_IRP''],''data_cond'')',d,l));
+                clear data_org
             end   
         end  
         

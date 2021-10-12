@@ -11,8 +11,8 @@ end
 % extension of the EEG files
 curexperiment.extension             = '*.bdf'; 
 % number of trials
-curexperiment.Ntrials_ret             = 900; 
-curexperiment.Ntrials_enc             = 450; 
+curexperiment.Ntrials_ret           = 900; 
+curexperiment.Ntrials_enc           = 450; 
 %the value you need to substract from the MATLAB markers to get the original EEG markers
 curexperiment.marker_offset         = 64512;
 % sampling frequency
@@ -207,10 +207,10 @@ curexperiment.plotchannels_Frontal  = {'F3','Fz','F4'};
 curexperiment.plotchannels_Parietal = {'P3','Pz','P4'};
 curexperiment.plotcolors            = 'brgkymrgbkymrgbkymrgbkym';
 % power analyses
-curexperiment.freq_interest.low     = 2:.333:30; %1:2:29; % frequencies of interest
+curexperiment.freq_interest.low     = 1:2:29; % frequencies of interest
 curexperiment.timwin.low            = 0.5; % length of timewindow for the low frequencies
 curexperiment.baselinewindow        = [-.2 0]; % baseline window
-curexperiment.baselinetype          = 'db'; % baseline window
+curexperiment.baselinetype          = 'absolute'; % baseline window
 curexperiment.curpow                = {'_Total','_Evoked','_Induced'}; % set the current power type of interest
 % subject groups
 curexperiment.subject_groups        = 1;

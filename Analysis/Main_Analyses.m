@@ -15,7 +15,7 @@ Main_Analyses_setup;
 fprintf('\n###################\n')
 fprintf('## PREPROCESSING ##\n')
 fprintf('###################\n')
-
+file_n=length(files);
 for f=1:file_n
     fprintf('\nPREPROCESSING\n\n')
     Main_Analyses_preprocessing
