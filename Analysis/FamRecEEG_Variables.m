@@ -185,7 +185,7 @@ curexperiment.elecs.label={
 % number of external electrodes
 curexperiment.Nextelectrodes        = 8;
 % filtering
-curexperiment.bp_lowfreq            = .5;
+curexperiment.bp_lowfreq            = .1;
 curexperiment.bp_highfreq           = 30; 
 % dataset names
 curexperiment.datasets_names        = {'data_enc', 'data_ret', 'data_rest'};
